@@ -29,7 +29,7 @@ MODULE outputmod
   
   IMPLICIT NONE
   PRIVATE
-  PUBLIC :: print_state_mat, print_renormalized_mat, print_ortho_mat, mixing_angles, print_dyson_orbs
+  PUBLIC :: print_state_mat, print_renormalized_mat, print_ortho_mat, print_nx, mixing_angles, print_dyson_orbs
 !--------------------------------------------------------------------------------------------------------------------------------==
 !--------------------------------------------------------------------------------------------------------------------------------==
 CONTAINS
@@ -158,6 +158,30 @@ CONTAINS
     CALL print_state_mat(logA, print_debug, .true.)
   
   END SUBROUTINE
+
+!--------------------------------------------------------------------------------------------------------------------------------
+
+  SUBROUTINE print_nx(A)
+    IMPLICIT NONE
+    REAL(KIND=dop), DIMENSION(:,:), INTENT(IN) :: A
+
+    INTEGER(KIND=ilong) :: N1, N2, st1
+    INTEGER(KIND=ilong) :: astate, bstate
+        
+    N1 = size(A,1)
+    N2 = size(A,2)
+
+    OPEN(25, file = 'cioverlap', status = 'replace', action='write')    
+      
+      WRITE(25,'(I2,2X,I2)') N1, N2
+      st1 = 1
+      DO astate=1,N1
+        WRITE(25,'(999F14.10)') (A(astate,bstate),bstate=st1,N2)
+      END DO
+
+    CLOSE(25)
+    
+  END SUBROUTINE print_nx
   
   !--------------------------------------------------------------------------------------------------------------------------------
 

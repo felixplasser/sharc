@@ -693,6 +693,23 @@ PROGRAM main
       WRITE(6,'(X,ES16.8e2)',ADVANCE='yes')mo_ovl_mix(i,j)
     END DO
   END IF ! debug
+
+  IF(nx)THEN
+
+    open(13, file = 'mo_overlap.dat', status = 'replace', action='write')
+200 FORMAT(F12.8)   
+
+    DO i=1,L_nMO
+      DO j=1,R_nMO-1
+        WRITE(13,200,ADVANCE='no')mo_ovl_mix(i,j)
+      END DO
+      j=R_nMO
+      WRITE(13,200,ADVANCE='yes')mo_ovl_mix(i,j)
+    END DO
+    close(13) 
+
+  END IF
+
   NULLIFY(L_MOcoefs)
   NULLIFY(R_MOcoefs)
   allocstat=mydealloc(bra_MOcoefs)
@@ -977,6 +994,10 @@ PROGRAM main
         WRITE(6,*)
         WRITE(6,*)"Orthonormalized overlap matrix <PsiA_i|PsiB_j>"
         CALL print_ortho_mat(wf_ovl, wf_ovl_ortho, debug)
+        
+        IF (nx) THEN
+           CALL print_nx(wf_ovl_ortho)
+        END IF
         
         IF (do_mixing_angles) CALL mixing_angles(wf_ovl_ortho, debug)
       
