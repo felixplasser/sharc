@@ -1,6 +1,0 @@
-export SHARC=$HOME/sharc/bin
-export PYSHARC=$SHARC/../pysharc
-export SHARCLIB=$SHARC/../lib
-export ANACONDA=$HOME/anaconda2/
-export PYTHONPATH=$SHARCLIB:$PYSHARC:$PYTHONPATH
-export LD_LIBRARY_PATH=$SHARCLIB:$ANACONDA/lib:$LD_LIBRARY_PATH
