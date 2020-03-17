@@ -26,7 +26,7 @@ MODULE sysparam
   IMPLICIT NONE
   PRIVATE
   PUBLIC :: dop, sip, ilong, ishort, ivshort, debug, maxdebug, freeunit, lc, &
-    & iOne, iZero, dOne, dZero, d_epsilon, pi, au2eV, au2Ang, maxmem
+    & iOne, iZero, dOne, dZero, d_epsilon, pi, au2eV, au2Ang, maxmem, nx
 
   INTEGER, PARAMETER :: ilong=SELECTED_INT_KIND(18) ! integer*8
   INTEGER, PARAMETER :: ishort=SELECTED_INT_KIND(9) ! INTEGER*4
@@ -45,6 +45,7 @@ MODULE sysparam
   INTEGER (KIND=ilong):: maxmem=1073741824
 
   LOGICAL:: debug=.FALSE.
+  LOGICAL:: nx=.FALSE.
   INTEGER (KIND=ilong), PARAMETER :: maxdebug=2000
 
   REAL (KIND=dop), PARAMETER :: d_epsilon=epsilon(1.0_dop)

@@ -85,6 +85,8 @@ CONTAINS
           END IF
         ELSEIF (trim(lcclarg) == "--debug") THEN
           debug = .TRUE.
+        ELSEIF (trim(lcclarg) == "--nx") THEN
+          nx = .TRUE.  
         ELSEIF (trim(lcclarg) == "-m") THEN
           IF ((i+1).GT.nclargs) THEN
             STOP '-m must be followed by a number'
