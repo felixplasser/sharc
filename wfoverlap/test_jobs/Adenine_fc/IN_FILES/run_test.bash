@@ -1,3 +1,6 @@
+echo
+echo "*** Skipping extra_test.bash ***"
+
 $OVDIR/../bin/wfoverlap.x -f ciov_all.in > ciov_all.out
 $OVDIR/../bin/wfoverlap.x -f ciov_fc.in  > ciov_fc.out
 $OVDIR/../bin/wfoverlap.x -f dyson.in > dyson.out
