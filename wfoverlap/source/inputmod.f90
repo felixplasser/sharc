@@ -56,7 +56,7 @@ CONTAINS
     LOGICAL:: readthis
     LOGICAL:: test
 
-    WRITE(6,*),"Reading input"
+    WRITE(6,*) "Reading input"
 
     inp_fn='cioverlap.input' ! default value
 

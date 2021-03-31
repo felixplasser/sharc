@@ -743,11 +743,11 @@ PROGRAM main
   allocstat = myalloc(P_block_ovl,LP_nblocks,maxRP,'+ P_block_ovl')
   
   IF((.NOT.force_direct_dets).and.(LP_nspin.gt.1))THEN
-    WRITE(6,*),"Precomputing P determinants using adaptive formalism"
+    WRITE(6,*) "Precomputing P determinants using adaptive formalism"
     CALL precalc_bovl(mo_ovl_mix, LP_nspin, RP_nsuperblks, RP_superblk_stind, &
       & LP_nblocks, LP_SSDblocks, RP_SSDblocks, P_block_ovl, maxRP)
   ELSE
-    WRITE(6,*),"Precomputing P determinants using direct formalism"
+    WRITE(6,*) "Precomputing P determinants using direct formalism"
     CALL precalc_ovl_direct(mo_ovl_mix, LP_nspin, LP_nblocks, &
       & RP_nblocks, LP_SSDblocks, RP_SSDblocks, P_block_ovl, -1, maxRP)
   END IF
@@ -805,11 +805,11 @@ PROGRAM main
 
       IF(precalc_Q)THEN
         IF(.NOT.force_direct_dets)THEN
-          WRITE(6,*),"Precomputing Q determinants using adaptive formalism"
+          WRITE(6,*) "Precomputing Q determinants using adaptive formalism"
           WRITE(6,*)"Not implemented!"
           STOP
         ELSE
-          WRITE(6,*),"Precomputing Q determinants using direct formalism"
+          WRITE(6,*) "Precomputing Q determinants using direct formalism"
           CALL precalc_ovl_direct(mo_ovl_mix, LQ_nspin, LQ_nblocks, &
             & RQ_nblocks, LQ_SSDblocks, RQ_SSDblocks, Q_block_ovl,MO,RQ_nblocks)
         END IF
@@ -822,16 +822,16 @@ PROGRAM main
 
       dyson_orb_mobas(MO,:,:)=dZero
       IF (precalc_Q)THEN
-        WRITE(6,*),"Dyson orbital part using precomputed quantities"
+        WRITE(6,*) "Dyson orbital part using precomputed quantities"
         CALL ov_dys_mem(dyson_orb_mobas(MO,:,:), L_CIcoefs, R_CIcoefs, LQ_CI_blockmap, LP_CI_blockmap, RQ_CI_blockmap, &
           & RP_CI_blockmap, P_block_ovl, Q_block_ovl, L_nstate, R_nstate, L_nSD, R_nSD,RQ_SSDblocks,MO)
       ELSE
         IF(.NOT.force_direct_dets)THEN
-          WRITE(6,*),"Dyson orbital part using semi-direct approach and adaptive determinant formalism"
+          WRITE(6,*) "Dyson orbital part using semi-direct approach and adaptive determinant formalism"
           WRITE(6,*)"Not implemented!"
           STOP
         ELSE
-          WRITE(6,*),"Dyson orbital part using semi-direct approach and direct determinant formalism"
+          WRITE(6,*) "Dyson orbital part using semi-direct approach and direct determinant formalism"
           CALL ov_dys_direct(dyson_orb_mobas(MO,:,:), mo_ovl_mix, L_CIcoefs, R_CIcoefs, &
             & LQ_SSDblocks, RQ_SSDblocks, LQ_CI_blockmap, &
             & LP_CI_blockmap, RP_CI_blockmap, P_block_ovl, RQ_block_stind, &
@@ -907,11 +907,11 @@ PROGRAM main
         allocstat =  myalloc(Q_block_ovl,LQ_nblocks,RQ_nblocks,'+ Q_block_ovl')
         IF (allocstat.EQ.0) THEN
           IF((.NOT.force_direct_dets).and.(LQ_nspin.gt.1))THEN
-            WRITE(6,*),"Precomputing Q determinants using adaptive formalism"
+            WRITE(6,*) "Precomputing Q determinants using adaptive formalism"
             CALL precalc_bovl(mo_ovl_mix, LQ_nspin, RQ_nsuperblks, RQ_superblk_stind, &
               & LQ_nblocks, LQ_SSDblocks, RQ_SSDblocks, Q_block_ovl, RQ_nblocks)
           ELSE
-            WRITE(6,*),"Precomputing Q determinants using direct formalism"
+            WRITE(6,*) "Precomputing Q determinants using direct formalism"
             CALL precalc_ovl_direct(mo_ovl_mix, LQ_nspin, LQ_nblocks, &
               & RQ_nblocks, LQ_SSDblocks, RQ_SSDblocks, Q_block_ovl, -1, RQ_nblocks)
           END IF
@@ -930,18 +930,18 @@ PROGRAM main
 
       wf_ovl=dZero
       IF (precalc_Q)THEN
-        WRITE(6,*),"Overlap using precomputed quantities"
+        WRITE(6,*) "Overlap using precomputed quantities"
         CALL ov_dys_mem(wf_ovl, L_CIcoefs, R_CIcoefs, LQ_CI_blockmap, LP_CI_blockmap, RQ_CI_blockmap, RP_CI_blockmap, &
           & P_block_ovl, Q_block_ovl, L_nstate, R_nstate, L_nSD, R_nSD, RQ_SSDblocks, -1)
       ELSE 
         IF((.NOT.force_direct_dets).and.(LQ_nspin.gt.1))THEN
-          WRITE(6,*),"Overlap using semi-direct approach and adaptive determinant formalism"
+          WRITE(6,*) "Overlap using semi-direct approach and adaptive determinant formalism"
           ! This subroutine does too much! Anything that needs that many arguments to work should be split up.
           CALL calc_cioverlap(wf_ovl, mo_ovl_mix, L_CIcoefs, R_CIcoefs, LQ_SSDblocks, RQ_SSDblocks, LQ_CI_blockmap, &
             & LP_CI_blockmap, RP_CI_blockmap, P_block_ovl, RQ_block_stind, RQ_superblk_stind, &
             & L_nstate, R_nstate, L_nSD, LQ_nspin, RQ_nspin, LQ_nblocks, RQ_nsuperblks, maxRP )
         ELSE
-          WRITE(6,*),"Overlap using semi-direct approach and direct determinant formalism"
+          WRITE(6,*) "Overlap using semi-direct approach and direct determinant formalism"
           CALL ov_dys_direct(wf_ovl, mo_ovl_mix, L_CIcoefs, R_CIcoefs, LQ_SSDblocks, RQ_SSDblocks, LQ_CI_blockmap, &
             & LP_CI_blockmap, RP_CI_blockmap, P_block_ovl, RQ_block_stind, &
             & L_nstate, R_nstate, L_nSD, LQ_nspin, RQ_nspin, LQ_nblocks, RQ_nblocks, -1, maxRP)
@@ -954,7 +954,7 @@ PROGRAM main
           WRITE(6, 300)(time-starttime)/(timeu*dOne), (time-lasttime)/(timeu*dOne)
           lasttime=time
           
-          WRITE(6,*),"Computing the out-of-core terms using an on-the-fly approach"
+          WRITE(6,*) "Computing the out-of-core terms using an on-the-fly approach"
           CALL ov_nopre_direct(wf_ovl, mo_ovl_mix, L_CIcoefs, R_CIcoefs, LQ_SSDblocks, RQ_SSDblocks, LP_SSDblocks, RP_SSDblocks, &
           & LQ_CI_blockmap, LP_CI_blockmap, RQ_CI_blockmap, RP_CI_blockmap, RQ_block_stind, &
           & L_nstate, R_nstate, L_nSD, LQ_nspin, RQ_nspin, LP_nspin, RP_nspin, LQ_nblocks, LP_nblocks, RQ_nblocks, maxRP)
