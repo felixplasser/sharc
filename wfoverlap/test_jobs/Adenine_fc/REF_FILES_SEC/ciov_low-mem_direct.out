@@ -1,8 +1,8 @@
 Using OpenMP version. Maximum number of threads:     4
  -------------------------------------------------------------------------------
  Reading input
- Reading input from file: ciov_fc.in
-*** walltime: total -        0.085s, step -        0.085s ***
+ Reading input from file: ciov_fc_direct.in
+*** walltime: total -        0.040s, step -        0.040s ***
  -------------------------------------------------------------------------------
 Number of <bra| electrons:              50
 Number of <bra| alpha el:               25
@@ -22,7 +22,7 @@ Number of |ket> determinants:         3235
 Number of det. pairs:             11765695
  -------------------------------------------------------------------------------
  Sorting determinants and CI vectors for blocking
-*** walltime: total -        0.119s, step -        0.034s ***
+*** walltime: total -        0.060s, step -        0.020s ***
  -------------------------------------------------------------------------------
 Number of <bra| alpha blocks:                916
 Number of |ket> alpha blocks:                886
@@ -38,19 +38,19 @@ Number of |ket>  beta superblocks:            66
  More alpha than beta blocks present - will pre-compute beta
  -------------------------------------------------------------------------------
   Reordering CI-coefficients
-*** walltime: total -        0.119s, step -        0.000s ***
+*** walltime: total -        0.060s, step -        0.000s ***
  -------------------------------------------------------------------------------
   Transforming mixed overlap matrix
-*** walltime: total -        0.132s, step -        0.013s ***
+*** walltime: total -        0.067s, step -        0.007s ***
  -------------------------------------------------------------------------------
- Precomputing P determinants using adaptive formalism
-*** walltime: total -        1.542s, step -        1.410s ***
-Exceeding memory limit. (maxmem, mem_used, memu) =(         8,         4,         6) MB
+ Precomputing P determinants using direct formalism
+*** walltime: total -        1.096s, step -        1.030s ***
+Exceeding memory limit. (maxmem, mem_used, memu) =(        10,         8,         6) MB
  Allocation of Q block overlap matrix failed.
   - Using on-the-fly algorithm for Q determinants.
  -------------------------------------------------------------------------------
- Overlap using semi-direct approach and adaptive determinant formalism
-*** walltime: total -        2.981s, step -        1.439s ***
+ Overlap using semi-direct approach and direct determinant formalism
+*** walltime: total -        2.142s, step -        1.045s ***
  ===============================================================================
  Overlap matrix <PsiA_i|PsiB_j>
                 |PsiB  1>     |PsiB  2>     |PsiB  3>     
@@ -72,14 +72,3 @@ Exceeding memory limit. (maxmem, mem_used, memu) =(         8,         4,       
 <PsiA  2|    0.3076419647 -0.9514616603  0.0087823963
 <PsiA  3|   -0.0529064584 -0.0263208674 -0.9982525325
   Angle to original matrix  0.0428350016
- 
- Computing mixing angles as matrix logarithm...
-  Determinant of the original matrix:     -1.0000000000
-  Determinant of the regularized matrix:   1.0000000000
-   -> Using this matrix
- 
- Mixing angles
-                |PsiB  1>     |PsiB  2>     |PsiB  3>     
-<PsiA  1|                  0.3123781104 -0.0566204508
-<PsiA  2|                               -0.0178509166
-<PsiA  3|  

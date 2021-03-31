@@ -1,1 +1,1 @@
-$OVDIR/../bin/wfoverlap_ascii.x -f ciovl.in  > ciovl.out
+$OVDIR/../bin/wfoverlap.x -f ciovl.in  > ciovl.out

@@ -40,7 +40,12 @@ If you have the COLUMBUS-MOLCAS interface installed on your system, set $COLUMBU
 make wfoverlap.x
 
 to compile the full version of wfoverlap.x (only needed for SHARC dynamics with COLUMBUS and Dyson norm computations with MOLCAS).
-Note that if you only compile wfoverlap_ascii.x, then make will create a symbolic link wfoverlap.x pointing to wfoverlap_ascii.x.
+
+To copy the files to the bin directory type
+
+make install
+
+Note that if you only compile wfoverlap_ascii.x, then this will create a symbolic link wfoverlap.x pointing to wfoverlap_ascii.x.
 
 To test the installation, first check if the COLUMBUS and MOLCAS variables are set. If they are, then the COLUMBUS and MOLCAS interfaces
 are tested. Then run inside the source directory

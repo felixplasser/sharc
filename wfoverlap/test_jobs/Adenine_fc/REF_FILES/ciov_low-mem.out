@@ -1,8 +1,8 @@
-Using OpenMP version. Maximum number of threads:     4
+Using OpenMP version. Maximum number of threads:     2
  -------------------------------------------------------------------------------
  Reading input
  Reading input from file: ciov_fc.in
-*** walltime: total -        0.085s, step -        0.085s ***
+*** walltime: total -        0.042s, step -        0.042s ***
  -------------------------------------------------------------------------------
 Number of <bra| electrons:              50
 Number of <bra| alpha el:               25
@@ -22,7 +22,7 @@ Number of |ket> determinants:         3235
 Number of det. pairs:             11765695
  -------------------------------------------------------------------------------
  Sorting determinants and CI vectors for blocking
-*** walltime: total -        0.122s, step -        0.037s ***
+*** walltime: total -        0.079s, step -        0.037s ***
  -------------------------------------------------------------------------------
 Number of <bra| alpha blocks:                916
 Number of |ket> alpha blocks:                886
@@ -38,19 +38,39 @@ Number of |ket>  beta superblocks:            66
  More alpha than beta blocks present - will pre-compute beta
  -------------------------------------------------------------------------------
   Reordering CI-coefficients
-*** walltime: total -        0.122s, step -        0.000s ***
+*** walltime: total -        0.079s, step -        0.000s ***
  -------------------------------------------------------------------------------
   Transforming mixed overlap matrix
-*** walltime: total -        0.143s, step -        0.021s ***
+*** walltime: total -        0.087s, step -        0.008s ***
  -------------------------------------------------------------------------------
+ Only 703 out of 886 columns of the P_ovl matrix are stored in memory (5 MB)!
+ Increase the amount of memory to improve the efficiency.
  Precomputing P determinants using adaptive formalism
-*** walltime: total -        1.635s, step -        1.492s ***
-Exceeding memory limit. (maxmem, mem_used, memu) =(         9,         5,         6) MB
- Allocation of Q block overlap matrix failed.
-  - Using on-the-fly algorithm for Q determinants.
- -------------------------------------------------------------------------------
+*** walltime: total -        1.245s, step -        1.158s ***
  Overlap using semi-direct approach and adaptive determinant formalism
-*** walltime: total -        3.070s, step -        1.435s ***
+*** walltime: total -        2.831s, step -        1.586s ***
+ Computing the out-of-core terms using an on-the-fly approach
+  5%
+ 10%
+ 15%
+ 20%
+ 25%
+ 30%
+ 35%
+ 40%
+ 45%
+ 50%
+ 55%
+ 60%
+ 65%
+ 70%
+ 75%
+ 80%
+ 85%
+ 90%
+ 95%
+100%
+*** walltime: total -        5.405s, step -        2.574s ***
  ===============================================================================
  Overlap matrix <PsiA_i|PsiB_j>
                 |PsiB  1>     |PsiB  2>     |PsiB  3>     

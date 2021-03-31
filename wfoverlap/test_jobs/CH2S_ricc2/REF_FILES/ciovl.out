@@ -68,6 +68,6 @@ Number of |ket>  beta superblocks:             6
  Orthonormalized overlap matrix <PsiA_i|PsiB_j>
                 |PsiB  1>     |PsiB  2>     |PsiB  3>     
 <PsiA  1|    1.0000000000  0.0000000000  0.0000000000
-<PsiA  2|   -0.0000000000  1.0000000000 -0.0000000000
-<PsiA  3|   -0.0000000000  0.0000000000  1.0000000000
+<PsiA  2|   -0.0000000000  1.0000000000  0.0000000000
+<PsiA  3|   -0.0000000000 -0.0000000000  1.0000000000
   Angle to original matrix  0.0156615140
