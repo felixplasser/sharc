@@ -139,7 +139,7 @@ def run_seward(molcasin_name):
     os.environ['ThisDir']=os.getcwd()
     
     mout = open('molcas.output.seward', 'w')
-    retval = subprocess.call(['molcas', molcasin_name], stdout=mout)
+    retval = subprocess.call(['pymolcas', molcasin_name], stdout=mout)
     mout.close()
     
     print "   Finished with returncode: %i\n"%retval
