@@ -67,7 +67,11 @@ DUMMYOBS=read_dalton_dummy.o read_molcas_dummy.o
 
 # activate direct reading of Dalton and Seward files
 #LIBS = $(COLUMBUS)/libmolcas_col.a $(COLUMBUS)/colib.a $(COLUMBUS)/blaswrapper.a  $(LALIB)
-OPTOBS = read_dalton.o read_molcas.o
+#OPTOBS = read_dalton.o read_molcas.o
+
+# activate direct reading of only Seward files
+LIBS = $(MOLCAS)/lib/libmolcas.a $(LALIB)
+OPTOBS = read_dalton_dummy.o read_molcas.o
 
 ############## Compilation routines #############
 
