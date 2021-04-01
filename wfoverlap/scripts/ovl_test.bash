@@ -52,11 +52,12 @@ if [ ! -z "$COLUMBUS" ]; then
     echo "found COLUMBUS=$COLUMBUS"
     echo "  including Tests: $colt"
     tests="$tests $colt"
-    if [ ! -z "$MOLCAS" ]; then
-        echo "found MOLCAS=$MOLCAS"
-        echo "  including Tests: $colmct"
-        tests="$tests $colmct"
-    fi
+fi
+
+if [ ! -z "$MOLCAS" ]; then
+    echo "found MOLCAS=$MOLCAS"
+    echo "  including Tests: $colmct"
+    tests="$tests $colmct"
 fi
 
 rm -r OVL_TEST
@@ -94,8 +95,9 @@ do
         for rfile in `ls "$sdir/REF_FILES"`
         do
             echo "  -> $rfile"
-            diff -b -I walltime -I thread -I "memory limit" -I ^MO -I "P_ovl matrix" "$sdir/REF_FILES/$rfile" $rfile
-            chk=$((chk+$?))
+            #diff -b -I walltime -I thread -I "memory limit" -I ^MO -I "P_ovl matrix" "$sdir/REF_FILES/$rfile" $rfile
+            #chk=$((chk+$?))
+            diff -b "$sdir/REF_FILES/$rfile" $rfile | grep PsiA && chk=$((chk+1))
         done
     fi
 
