@@ -1007,7 +1007,10 @@ def write_LVC_template(INFOS):
   print 'Number of states:',INFOS['nstates']
   print 'Number of atoms:',len(INFOS['atoms'])
   print 'Kappas:', ['numerical','analytical'][INFOS['ana_grad']]
-  print 'Lambdas:', ['numerical','analytical'][INFOS['ana_nac']]
+  if INFOS['do_lambda']:
+      print 'Lambdas:', ['numerical','analytical'][INFOS['ana_nac']]
+  else:
+      print 'Lambdas: none'
   print
   print 'Reading files ...'
   print 
@@ -1113,17 +1116,20 @@ def write_LVC_template(INFOS):
 
   # ------------------------ numerical kappas and lambdas --------------------------
 
-  if not ( INFOS['ana_nac'] and INFOS['ana_grad'] ):
+  if not INFOS['ana_nac'] and not INFOS['ana_grad']:
+    whatstring='kappas and lambdas'
+  elif not INFOS['ana_grad']:
+    whatstring='kappas'
+  elif INFOS['do_lambda'] and not INFOS['ana_nac']:
+    whatstring='lambdas'
+  else:
+    whatstring=''
+
+  if not ( whatstring == '' ):
     if not 'displacements' in INFOS:
       print 'No displacement info found in "displacements.json"!'
       sys.exit(1)
 
-    if not INFOS['ana_nac'] and not INFOS['ana_grad']:
-      whatstring='kappas and lambdas'
-    elif not INFOS['ana_grad']:
-      whatstring='kappas'
-    elif not INFOS['ana_nac']:
-      whatstring='lambdas'
 
     # running through all normal modes
     for normal_mode, v in INFOS['normal_modes'].items():

@@ -1937,7 +1937,10 @@ def readQMin(QMinfilename):
 
     # setup environment for Orca
     QMin['orcadir']=get_sh2Orca_environ(sh2Orca,'orcadir')
-    os.environ['LD_LIBRARY_PATH']='%s:' % (QMin['orcadir'])+os.environ['LD_LIBRARY_PATH']
+    try:
+        os.environ['LD_LIBRARY_PATH']='%s:' % (QMin['orcadir'])+os.environ['LD_LIBRARY_PATH']
+    except KeyError:
+        os.environ['LD_LIBRARY_PATH']='%s' % (QMin['orcadir'])
     QMin['OrcaVersion']=getOrcaVersion(QMin['orcadir'], )
     print 'Detected ORCA version %s' % (str(QMin['OrcaVersion']))
     os.environ['PATH']='%s:' % (QMin['orcadir']) +os.environ['PATH']

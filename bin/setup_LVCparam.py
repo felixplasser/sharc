@@ -3258,24 +3258,33 @@ def get_general():
   print '\nAnalytical gradients for kappas: %r\n' % INFOS['ana_grad']
 
 
-  ## -------------------- whether to do gradients or numerical -------------------- ##
-  print centerstring('Analytical nonadiabatic coupling vectors', 60, '-')+'\n'
-  if 'nacdr' in Interfaces[num]['features']:
+  ## -------- whether to do non-ad. couplings or numerical or no lambdas---------- ##
+  print centerstring('Interstate couplings', 60, '-')+'\n'
+  INFOS['do_lambda'] = question('Do you want to compute interstate couplings (lambda terms)?', bool, True)
 
-    INFOS['ana_nac'] = question('Do you want to use analytical nonadiabatic coupling vectors for lambda terms?', bool, False)
+  print 'Do you want to compute interstate couplings (lambda terms): %r\n' % INFOS['do_lambda']
+  
+  if INFOS['do_lambda']:
+      print centerstring('Analytical nonadiabatic coupling vectors', 60, '-')+'\n'
+      if 'nacdr' in Interfaces[num]['features']:
 
+        INFOS['ana_nac'] = question('Do you want to use analytical nonadiabatic coupling vectors for lambda terms?', bool, False)
+
+      else:
+        INFOS['ana_nac'] = False
   else:
-    INFOS['ana_nac'] = False
+      INFOS['ana_nac'] = False
 
   print 'Do you want to use analytical nonadiabatic coupling vectors for lambdas: %r\n' % INFOS['ana_nac']
   if INFOS['ana_nac']:
     INFOS['needed'].extend(Interfaces[num]['features']['nacdr'])
 
   ## -------------------- Whether to do overlaps -------------------- ##
-  if (not INFOS['ana_grad']) or (not INFOS['ana_nac']):
-    do_overlaps=True
-  else:
-    do_overlaps=False
+  do_overlaps = False
+  if not INFOS['ana_grad']:
+      do_overlaps = True
+  elif INFOS['do_lambda'] and not INFOS['ana_nac']:
+      do_overlaps=True
 
   if do_overlaps:
     if not 'overlap' in Interfaces[num]['features']:
@@ -3348,7 +3357,7 @@ def get_general():
 
 
     ## -------------------- ignore problematic states -------------------- ##
-    if not (INFOS['ana_grad'] and INFOS['ana_nac']):
+    if INFOS['do_overlaps']:
       print centerstring('Intruder states', 60, '-')
 
       print '''
