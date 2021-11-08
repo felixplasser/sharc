@@ -2974,7 +2974,7 @@ The BAGEL interface will generate the appropriate BAGEL input automatically.
         continue
       if checktemplate_BAGEL(filename,INFOS):
         break
-    INFOS['molcas.template']=filename
+    INFOS['bagel.template']=filename
   print ''
 
   print centerstring('Dipole level',60,'-')+'\n'
@@ -3090,7 +3090,7 @@ def prepare_BAGEL(INFOS,iconddir):
   string='bagel %s\npyquante %s\nscratchdir %s/%s/\nmemory %i\nncpu %i\ndipolelevel %i\nproject %s' % (INFOS['bagel'],INFOS['bagel.pyq'],INFOS['scratchdir'],iconddir,INFOS['bagel.mem'],INFOS['bagel.ncpu'],INFOS['dipolelevel'],project)
   
   if INFOS['bagel.mpi']:
-    string+='mpi\n'
+    string+='mpi_parallel\n'
   if 'wfoverlap' in INFOS['needed']:
     string+='\nwfoverlap %s\n' % INFOS['bagel.wfoverlap']
   else:
