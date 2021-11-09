@@ -128,8 +128,47 @@ def setup_parser():
     parser = OptionParser(usage=usage)
     parser.add_option('-m', dest='m', type=int, nargs=1, default=1, help="Multiplicity of target state (default=1)")
     parser.add_option('-s', dest='s', type=int, nargs=1, default=2, help="Index of target state (default=2)")
+    parser.add_option('-p', dest='p', default=False, help="Plot using pylab", action="store_true")
     
     return parser
+# ============================================================================
+
+def plot_lam(Om, lam, pname='reorg.png'):
+    import pylab
+    from matplotlib import rc
+
+    pylab.figure(figsize=(8,6))
+    rc('font', size=14)
+
+    for i, omval in enumerate(Om):
+        orcm = omval * au2rcm
+        pylab.plot([orcm, orcm], [-1., lam[i] * au2rcm], 'ro-')
+
+    pylab.xlabel('Wavenumber (1/cm)')
+    pylab.ylabel('Reorganisation en. (1/cm)')
+    pylab.axis(ymin=-10.)
+    pylab.savefig(pname)
+
+    print("Plot file %s created."%pname)
+# ============================================================================
+def plot_S(Om, S, pname='Huang_Rhys.png'):
+    import pylab
+    from matplotlib import rc
+
+    pylab.figure(figsize=(8,6))
+    rc('font', size=14)
+
+    for i, omval in enumerate(Om):
+        orcm = omval * au2rcm
+        pylab.plot([orcm, orcm], [-1., S[i]], 'ro-')
+
+    pylab.xlabel('Wavenumber (1/cm)')
+    pylab.ylabel('Huang-Rhys factor')
+    pylab.axis(ymin=-.01)
+    pylab.savefig(pname)
+
+    print("Plot file %s created."%pname)
+# ============================================================================
 
 def main():
     (options, args) = setup_parser().parse_args()
@@ -141,13 +180,16 @@ def main():
     S   = [0. for omval in SH2LVC['Om']]
     lam = [0. for omval in SH2LVC['Om']]
 
+    ncontrib = 0
     for k in SH2LVC['kappa']:
         (imult, istate, i, val) = k
         if imult==jmult and istate==jstate:
+            ncontrib += 1
             S[i] =   0.5 * val**2 / SH2LVC['Om'][i]**2
             lam[i] = 0.5 * val**2 / SH2LVC['Om'][i]
 
-    print "Total reorganisation energy: %10.2f cm-1\n"%(sum(lam) * au2rcm)
+    print "Total reorganisation energy: %10.2f cm-1"%(sum(lam) * au2rcm)
+    print "Number of contributing modes: %i/%i\n"%(ncontrib, len(SH2LVC['Om']))
 
     print "%5s %10s %10s %10s"%('', 'om/cm-1', 'S_i', 'lam_i/cm-1')
     print 32*"-"
@@ -156,6 +198,10 @@ def main():
 
     print 32*"-"
     print "%16s %10.3f %10.2f"%('', sum(S), sum(lam) * au2rcm) 
+
+    if options.p:
+        plot_lam(SH2LVC['Om'], lam)
+        plot_S(SH2LVC['Om'], S)
 
 # ============================================================================
 if __name__ == '__main__':
